@@ -16,7 +16,6 @@ public class ChatServer extends Thread {
     public ChatServer(JTextArea textArea) {
         this.textArea = textArea;
         socket = null;
-        byte[] data = new byte[1024];
         try {
             socket = new DatagramSocket(minPort);
         } catch (SocketException e) {
@@ -26,26 +25,31 @@ public class ChatServer extends Thread {
 
     public void run() {
         while (true) {
-            byte[] data = new byte[256];
+            byte[] data = new byte[1024];
             packet = new DatagramPacket(data, data.length);
             try {
                 socket.receive(packet);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            //String sender = packet.getAddress().getHostAddress();
-            //String sender = packet.getAddress().getHostName();
-            //String sender = packet.getAddress().getCanonicalHostName();
-            String message = new String(packet.getData(),
-                    0, packet.getLength());
-            textArea.setText(packet.getAddress() + ": " + message);
+
+            StringBuilder SB = null;
+            try {
+                String message = new String(packet.getData(),
+                        0, packet.getLength());
+                SB = new StringBuilder();
+                SB.append(message);
+                textArea.append(packet.getAddress() + ": " + SB + "\n");
+            } catch (Exception e) {
+                System.out.println("PLEASE MAKE SURE YOU'RE CONNECTED 4");
+            }
 
             System.out.println("Meddelande från " +
                     packet.getAddress().getHostAddress());
             System.out.println("Meddelande från " +
                     packet.getAddress().getHostName());
 
-            System.out.println(message);
+            System.out.println(SB);
         }
     }
 }
