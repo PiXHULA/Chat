@@ -22,7 +22,8 @@ public class ChatClient extends JFrame{
     ChatServer chatServer;
     InetAddress toAdr;
     InetAddress local = InetAddress.getLocalHost();
-    int toPort = 55555;
+    //int toPort = 80;
+    int toPort = 12345;
     DatagramSocket socket = new DatagramSocket();
 
     public ChatClient() throws IOException {
@@ -39,6 +40,7 @@ public class ChatClient extends JFrame{
             try {
                 socket = new DatagramSocket();
                 toAdr = InetAddress.getByName("172.20.202.126");
+                //toAdr = InetAddress.getByName("0.0.0.0");
             } catch (UnknownHostException | SocketException ex) {
                 ex.printStackTrace();
             }

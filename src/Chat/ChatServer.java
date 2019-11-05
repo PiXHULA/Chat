@@ -3,13 +3,13 @@ package Chat;
 
 import javax.swing.*;
 import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.SocketException;
+import java.net.*;
 
 public class ChatServer extends Thread {
     DatagramSocket socket;
-    int minPort = 55555;
+    //int minPort = 80;
+    String anslut = "213.67.202.185";
+    int minPort = 12345;
     DatagramPacket packet;
     JTextArea textArea = new JTextArea();
 
