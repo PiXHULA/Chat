@@ -8,7 +8,7 @@ import java.net.*;
 public class ChatServer extends Thread {
     DatagramSocket socket;
     //int minPort = 80;
-    String anslut = "213.67.202.185";
+    String anslut = "127.0.0.1";
     int minPort = 12345;
     DatagramPacket packet;
     JTextArea textArea = new JTextArea();
